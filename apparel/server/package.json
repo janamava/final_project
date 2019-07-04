@@ -1,0 +1,18 @@
+{
+  "name": "appserver",
+  "version": "1.0.0",
+  "description": "Nodejs server for apparel shop project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Aizhana Kamalova",
+  "license": "MIT",
+  "dependencies": {
+    "connect-busboy": "0.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fileupload": "^1.0.0",
+    "formidable": "^1.2.1"
+  }
+}
