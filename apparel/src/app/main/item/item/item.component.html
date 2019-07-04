@@ -1,0 +1,73 @@
+<div class="filters">
+  <div class="userInput">
+    <select (change)="onSelect($event)">
+      <option value="" disabled selected>Category</option>
+      <option>Any</option>
+      <option>Tops</option>
+      <option>Coats</option>
+      <option>Sweaters</option>
+      <option>Pants</option>
+      <option>Dress</option>
+      <option>Shoes</option>
+      <option>Accessories</option>
+    </select>
+  </div>
+
+  <div class="userInput">
+    <select (change)="onSelect($event)">
+      <option value="" disabled selected>Season</option>
+      <option>Any</option>
+      <option>Spring</option>
+      <option>Summer</option>
+      <option>Autumn</option>
+      <option>Winter</option>
+    </select>
+  </div>
+
+  <div class="userInput">
+    <select (change)="onSelect($event)">
+      <option value="" disabled selected>Size</option>
+      <option>Any</option>
+      <option>XS</option>
+      <option>S</option>
+      <option>M</option>
+      <option>L</option>
+      <option>XL</option>
+    </select>
+  </div>
+
+  <div class="userInput">
+    <select (change)="onSelect($event)">
+      <option value="" disabled selected>Gender</option>
+      <option>Any</option>
+      <option>female</option>
+      <option>male</option>
+      <option>child</option>
+    </select>
+  </div>
+
+</div>
+
+<div class="item">
+
+  <ng-container *ngIf="images$ | async as images">
+    <div class="images" *ngFor="let image of images">
+
+      <ng-container *ngIf="filterItem(image)">
+        <figure>
+          <img [ngClass]="setReserved(image)" class="image" src="{{ image.imageUrl }}" alt="{{ image.name }}">
+
+          <p class="paragraph">
+            <span class="name" title="{{ image.name }}"> {{ image.name }}</span>
+            <span class="size"> Size: {{ image.size }}</span>
+
+
+            <button class="reserve" (click)="notify(image)" *ngIf="image.booked === true">Reserved</button>
+            <button class="reserve" (click)="notify(image)" *ngIf="image.booked === false">Reserve</button>
+
+          </p>
+        </figure>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

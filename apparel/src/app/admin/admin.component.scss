@@ -1,0 +1,50 @@
+.container {
+  margin-left: 550px;
+  margin-top: 70px;
+  width: 650px;
+  height: 1200px;
+}
+
+.header {
+  text-align: center;
+}
+
+.uploadForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 20px;
+}
+
+
+.userInput {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+
+.size{
+  height: 43px;
+}
+
+span{
+  margin: 10px;
+}
+
+.radioInput {
+  margin-bottom: 20px;
+}
+
+button {
+  width: 100px;
+  height: 43px;
+  margin-left: 250px;
+  margin-top: 20px;
+  background-color: lightseagreen;
+}
+
+button:hover {
+  background-color: rgb(26, 145, 125);
+}

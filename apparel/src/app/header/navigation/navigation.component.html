@@ -1,0 +1,18 @@
+<div class="navigation">
+
+  <!-- <div class="about"><app-about></app-about></div> -->
+
+  <h1 class="name">Apparel</h1>
+
+  <div class="icons">
+
+    <app-search></app-search>
+    <app-authorization></app-authorization>
+
+    <ng-container *ngIf="this.storage.get('username')">
+      <app-basket></app-basket>
+    </ng-container>
+
+  </div>
+
+</div>

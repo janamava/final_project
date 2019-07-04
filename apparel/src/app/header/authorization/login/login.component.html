@@ -1,0 +1,35 @@
+<button class="close" (click)="onClose()"><span>X</span></button>
+
+<form [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
+
+  <div class="text">SIGN IN:</div>
+
+  <div class="form-group">
+    <input class="form-control" type="text" id="username" formControlName="username" placeholder="Your username" />
+    <div class="form-error">
+      <span class="notification" *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">The
+        username should not be less than 6 characters.</span>
+    </div>
+    <!-- <span class="notification" *="!loginForm.get('username').valid && loginForm.get('username').touched">The username should be not more than 20 characters.</span> -->
+  </div>
+
+  <div class="form-group">
+    <input class="form-control" type="password" id="password" formControlName="password" placeholder="Your password" />
+    <div class="form-error">
+      <span class="notification" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">The
+        password should not be less than 6 characters.</span>
+    </div>
+  </div>
+
+  <div class="button">
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </div>
+
+  <div class="form-error warning">
+    <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched
+    || !loginForm.get('password').valid && loginForm.get('password').touched">
+      Please check your credentials
+    </span>
+  </div>
+
+</form>

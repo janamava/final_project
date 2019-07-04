@@ -1,0 +1,96 @@
+<div class="container">
+
+  <h1 class="header">UPLOAD FORM:</h1>
+
+  <form [formGroup]="uploadForm" class="uploadForm" (ngSubmit)="onSubmit()">
+
+    <div class="userInput">
+      <label for="name">Name</label>
+      <input class="size" formControlName="name" id="name" type="text">
+    </div>
+
+    <div class="userInput textarea">
+      <label for="description">Description</label>
+      <textarea formControlName="description" name="" id="description" cols="30" rows="10"></textarea>
+    </div>
+
+
+
+    <div class="userInput">
+      <label for="image">Upload picture</label>
+
+      <input type="file" formControlName="imageFilepath" (change)=onFileSelected($event) />
+
+      <ng-container *ngIf="imageFilepath">
+        <img src="imageFilepath" />
+      </ng-container>
+      <!-- <span>or</span>
+      <label for="">Paste image URL</label>
+
+      <input class="size" type="text" formControlName="imageUrl" /> -->
+    </div>
+
+
+    <div class="radio">
+      <ng-container *ngFor="let gender of genders">
+        <div class="radioInput">
+          <label class="radio">
+            <input formControlName="gender" id="gender" type="radio" [value]="gender"><span>{{gender}}</span>
+          </label>
+        </div>
+      </ng-container>
+    </div>
+
+
+    <div class="userInput">
+      <label for="type">Type</label>
+      <select class="size" formControlName="type">
+        <option value="" disabled selected>Choose a type</option>
+        <option>Tops</option>
+        <option>Coats</option>
+        <option>Sweaters</option>
+        <option>Pants</option>
+        <option>Dress</option>
+        <option>Shoes</option>
+        <option>Accessories</option>
+      </select>
+    </div>
+
+
+    <div class="userInput"> 
+      <label for="color">Color</label>
+      <input class="size" formControlName="color" id="color" type="text">
+    </div>
+
+
+    <div class="userInput">
+      <label for="season">Season</label>
+      <select class="size" formControlName="season" name="" id="">
+        <option value="" disabled selected>Choose a season</option>
+        <option>Any</option>
+        <option>Spring</option>
+        <option>Summer</option>
+        <option>Autumn</option>
+        <option>Winter</option>
+      </select>
+    </div>
+
+    <div class="userInput">
+      <label for="size">Size</label>
+      <select class="size" formControlName="size" name="" id="">
+        <option value="" disabled selected>Choose a size</option>
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+      </select>
+    </div>
+
+    <div>
+      <button type="submit">Upload</button>
+    </div>
+
+  </form>
+
+</div>

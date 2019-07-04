@@ -1,0 +1,170 @@
+<button class="cancel" (click)="onClose()">X</button>
+
+<h2>Create your <span class="account">account:</span></h2>
+
+<form [formGroup]="formGroup" (ngSubmit)='onSubmit()'>
+
+  <div class="username input">
+
+    <input class="input" type="text" formControlName="username" placeholder="Username" required
+      [class.error]="username.invalid && (username.touched || username.dirty)" [class.correct]="username.valid">
+
+    <ng-container *ngIf="username.valid">
+      <p class="authentic">Valid username</p>
+    </ng-container>
+
+    <ng-container *ngIf="username.invalid && (username.dirty || username.touched)">
+
+      <ng-container *ngIf="username.errors.required">
+        <p class="warning">Username is required</p>
+      </ng-container>
+
+      <ng-container *ngIf="username.errors.minlength">
+        <p class="warning">Minimum of 6 characters are needed</p>
+      </ng-container>
+
+      <ng-container *ngIf="username.errors.maxlength">
+        <p class="warning">Maximum of 20 characters are allowed</p>
+      </ng-container>
+
+      <ng-container *ngIf="noSpace(username.value)">
+        <p class="warning">No spaces are allowed</p>
+      </ng-container>
+
+      <ng-container *ngIf="!isLowerCased(username.value) && username.dirty">
+        <p class="warning">Please include at least 1 lower-cased letter</p>
+      </ng-container>
+
+      <ng-container *ngIf="!isUpperCased(username.value) && username.dirty">
+        <p class="warning">Please include at least 1 upper-cased letter</p>
+      </ng-container>
+
+      <ng-container *ngIf="!hasANumber(username.value) && username.dirty">
+        <p class="warning">Please include at least 1 number</p>
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+  <div class="password input">
+
+    <div class="container">
+      <input class="input special" [type]="hidePassword ? 'password' : 'text'" type="password"
+        formControlName="password" placeholder="Password"
+        [class.error]="password.invalid && (password.touched || password.dirty)" [class.correct]="
+      (matchingPassword.value === password.value) && 
+      (matchingPassword.value.length && password.value.length !== '') && 
+      (matchingPassword.value.length && password.value.length >= 6) && (password.valid && matchingPassword.valid)">
+
+      <button tabindex="-1" type="button" *ngIf="hidePassword" class="show-password"
+        (click)="hidePassword = !hidePassword">Show password
+      </button>
+      <button tabindex="-1" type="button" *ngIf="!hidePassword" class="show-password"
+        (click)="hidePassword = !hidePassword">Hide password
+      </button>
+    </div>
+
+
+    <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+
+      <ng-container *ngIf="password.errors.required">
+        <p class="warning">Password is required</p>
+      </ng-container>
+
+      <ng-container *ngIf="password.errors.minlength">
+        <p class="warning">Minimum of 6 characters are needed</p>
+      </ng-container>
+
+      <ng-container *ngIf="password.errors.maxlength">
+        <p class="warning">Maximum of 20 characters are allowed</p>
+      </ng-container>
+
+      <ng-container *ngIf="!isLowerCased(password.value) && password.dirty">
+        <p class="warning">Please include at least 1 lower-cased letter</p>
+      </ng-container>
+
+      <ng-container *ngIf="!isUpperCased(password.value) && password.dirty">
+        <p class="warning">Please include at least 1 upper-cased letter</p>
+      </ng-container>
+
+      <ng-container *ngIf="!hasANumber(password.value) && password.dirty">
+        <p class="warning">Please include at least 1 number</p>
+      </ng-container>
+
+      <ng-container *ngIf="noSpace(password.value) && password.dirty">
+        <p class="warning">No spaces are allowed</p>
+      </ng-container>
+
+      <ng-container *ngIf="noSpecialCharacters(password.value) && password.dirty">
+        <p class="warning">No special characters are allowed</p>
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+  <div class="password input">
+
+    <input class="input" [type]="hidePassword ? 'password' : 'text'" type="password" formControlName="matchingPassword"
+      placeholder="Confirm your password" [class.error]="matchingPassword.invalid && matchingPassword.dirty"
+      [class.correct]="(matchingPassword.value === password.value) && 
+      (matchingPassword.value.length && password.value.length !== '') && 
+      (matchingPassword.value.length && password.value.length >= 6)">
+
+    <ng-container *ngIf="
+      (matchingPassword.value === password.value) && 
+      (matchingPassword.value.length && password.value.length !== '') && 
+      (matchingPassword.value.length && password.value.length >= 6) && (password.valid && matchingPassword.valid)">
+      <p class="authentic">Both passwords match!</p>
+    </ng-container>
+
+    <ng-container *ngIf="matchingPassword.invalid && (matchingPassword.dirty || matchingPassword.touched)">
+
+      <ng-container
+        *ngIf="(matchingPassword.dirty || matchingPassword.touched) && (matchingPassword.value !== password.value)  && (password.invalid && matchingPassword.invalid)">
+        <p class=" warning">Incorrect password, make sure both passwords match</p>
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+  <div class="email input">
+
+    <input class="input" type="email" name="email" formControlName="email" placeholder="Email"
+      [class.error]="email.invalid && (email.touched || email.dirty)" [class.correct]="email.valid">
+
+    <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+      <p class="warning">Please enter a valid email</p>
+    </ng-container>
+
+    <ng-container *ngIf="email.valid">
+      <p class="authentic">Valid email</p>
+    </ng-container>
+
+  </div>
+
+  <div class="address input">
+
+    <input class="input" type="text" name="address" formControlName="address" placeholder="Address">
+
+    <ng-container *ngIf="address.touched || address.dirty">
+      <p class="address"><strong><em>Optional</em></strong></p>
+    </ng-container>
+
+  </div>
+
+  <ng-container *ngIf="!isValidForm">
+
+    <button class="button disabled" disabled>
+      Create Account
+    </button>
+
+  </ng-container>
+
+  <button type="submit" class="button" *ngIf="isValidForm">
+    Create Account
+  </button>
+
+</form>
